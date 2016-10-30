@@ -1,0 +1,18 @@
+<div class="page-header">
+   <h1> Quicky Vegan <small>{{name}} (Admin)</small></h1>
+</div>
+<div class="row">
+	<div class="col-sm-6 col-md-4" ng-repeat="recipe in notModified">
+		<div class="thumbnail">
+			<img ng-src="{{recipe.imageURL}}" alt="image of recipe">
+		  	<div class="caption">
+				<h3>{{recipe.displayName}}</h3>
+				<p ng-model="recipeName">{{recipe.description}}</p>
+				<p>
+					<a ui-sref=".recipeDisplay({recipeName: recipe.name})" role="button" class="btn btn-default">Display</a>
+				</p>
+		  	</div>
+		</div>
+  	</div>
+</div>
+<div ui-view></div>

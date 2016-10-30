@@ -1,0 +1,10 @@
+id:4
+UNIX operating system, 1/2/1960.
+Unix (all-caps UNIX for the trademark) is a multitasking, multiuser computer operating system that exists in many variants. The original Unix was developed at AT&T's Bell Labs research center by Ken Thompson, Dennis Ritchie, and others.
+[3] From the power user's or programmer's perspective, Unix systems are characterized by a modular design that is sometimes called the "Unix philosophy," meaning the OS provides a set of simple tools that each perform a limited, well-defined function,[4] with a unified filesystem as the main means of communication and a shell scripting and command language to combine the tools to perform complex workflows.
+
+The C programming language was designed by Dennis Ritchie as a systems programming language for Unix, allowing for portability beyond the initial PDP-11 development platform and the use of Unix on numerous computing platforms.
+
+While initially intended for use inside the Bell System, Unix developed into a standard operating system for academia during the late 1970s and 1980s. AT&T tried to commercialize it by licensing the OS to third-party vendors, leading to a variety of both academic (e.g., BSD) and commercial variants of Unix (such as Xenix) and eventually to the "Unix wars" between groups of vendors. AT&T finally sold its rights in Unix to Novell in the early 1990s, which then sold its Unix business to the Santa Cruz Operation (SCO) in 1995, but the UNIX trademark passed to the industry standards consortium The Open Group, which allows the use of the mark for certified operating systems compliant with the Single UNIX Specification.
+
+Other operating systems that emulate Unix to some extent are often called Unix-like, although the Open Group disapproves of this term. The term Unix is also often used informally to denote any operating system that closely resembles the trademarked system. The most common version of Unix (bearing certification) is Apple's OS X, while Linux is the most popular non-certified workalike.

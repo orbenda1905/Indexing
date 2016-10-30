@@ -1,0 +1,85 @@
+<div id="wrapper" class="ingredient">
+    <div class="navigation">
+        <nav>
+       <div class="dropdown">
+           <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"></button>
+            <ul class="dropdown-menu">
+              <li><a>Profile</a></li>
+              <li class="divider"></li>
+              <li><a ui-sref="recipesByTime({favorite: '1'})">My Recpies</a></li>
+              <li class="divider"></li>
+              <li><a>Setting</a></li>
+            </ul>
+       </div>
+	   <section>
+		   <p>quicky<br><span>vegan</span></p>
+	   </section>
+	   <section class="sort">
+		   <div class="dropdown center">
+               <button class="btn-success dropdown-toggle" type="button" data-toggle="dropdown"></button>
+               <ul class="dropdown-menu dropdown-menu-right center">
+                    <li><a ng-click="showOnlyEntree()">Entree</a></li>
+                    <li class="divider"></li>
+                    <li><a ng-click="showOnlyLunch()">Lunch</a></li>
+                    <li class="divider"></li>
+                    <li><a ng-click="showOnlyPasta()">Pasta</a></li>
+                    <li class="divider"></li>
+                    <li><a ng-click="showOnlyAppetizer()">Appetizer</a></li>
+                    <li class="divider"></li>
+                    <li><a ng-click="showOnlyDessert()">Dessert</a></li>
+               </ul>
+           </div>
+		   <div class="dropdown">
+               <button class="btn-primary dropdown-toggle" type="button" data-toggle="dropdown"></button>
+               <ul class="dropdown-menu left">
+                   <li><a>Easy quicky</a></li>
+               </ul>
+           </div>
+	   </section>
+	</nav>
+    </div>
+    <img src="{{correctRecipe.imageURL}}" alt="">
+    <div class="frame">
+            <h3>{{correctRecipe.displayName}}</h3>
+            <p>{{correctRecipe.description}}</p>
+        <h2>Main</h2>
+        <section>
+            <h3>{{correctRecipe.ingredients.main.kind}}</h3>
+            <ul>
+                <li ng-repeat="ingredient in correctRecipe.ingredients.main.ingredients">{{ingredient.name}} - {{ingredient.quantity}}</li>
+            </ul>
+        </section>
+        <h2>Side</h2>
+        <section>
+            <h3>{{correctRecipe.ingredients.side.kind}}</h3>
+            <ul>
+                <li ng-repeat="ingredient in correctRecipe.ingredients.side.ingredients">{{ingredient.name}} - {{ingredient.quantity}}</li>
+            </ul>
+        </section>
+        <h3>Preparation Steps</h3>
+        <section class="stepsAdmin">
+            <ul>
+                <li ng-repeat="step in correctRecipe.steps.preparation">{{step.action}} - {{step.time}} min</li>
+            </ul>
+        </section>
+        <h3>Cooking Steps</h3>
+        <section class="stepsAdmin">
+            <ul>
+                <li ng-repeat="step in correctRecipe.steps.cooking">{{step.action}} - {{step.time}} min</li>
+            </ul>
+        </section>
+    </div>
+    <div class="line">
+        <p>Prep<span class="time">{{correctRecipe.timers.preparation}}</span><span class="min">min</span></p>
+        <div class="dividerPrep"></div>
+    </div>
+    <div class="line">
+        <p>Cook<span class="time">{{correctRecipe.timers.cooking}}</span><span class="min">min</span></p>
+        <div class="dividerCook"></div>
+    </div>
+    <div class="line">
+        <p>Total<span class="time">{{correctRecipe.timers.total}}</span><span class="min">min</span></p>
+        <div class="dividerTotal"></div>
+    </div>
+    <button type="button" class="btn btn-warning btn-lg btn-block" ng-click="startCooking()">Start To Cook</button>
+</div>

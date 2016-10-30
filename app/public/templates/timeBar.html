@@ -1,0 +1,28 @@
+<div class="fluid-row coverScreen">
+    <div class="span6">
+       <div class="panels">
+            <div class="panel panel-default side">
+                <div class="panel-body">{{correctRecipe.ingredients.side.kind}}</div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">{{correctRecipe.ingredients.main.kind}}</div>
+            </div>
+        </div>
+        <div class="timeline">
+            <div id="timeline3"></div>
+            <div id="timeline1"></div>
+            <div id="timeline2"></div>
+        </div>
+        <div class="finishRecipe">
+            <img src="{{correctRecipe.imageURL}}" alt="current recipe">
+            <div class="divider"></div>
+            <p>DONE!</p>
+            <div class="favorite">
+               <div ui-view>
+                    <img ng-src="./images/{{correctRecipe.favorite}}.png" alt="favorite" ng-click="addToFavorites()">
+                </div>
+            </div>
+            <li><a ui-sref="recipesByTime({favorite: '1'})">My Recpies</a></li>
+        </div>
+    </div>
+</div>

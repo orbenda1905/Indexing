@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="indexing" >
+	<head>
+		<meta charset="UTF-8">
+		<title>Indexing Program</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap-theme.min.css">
+		<link rel="stylesheet" type="text/css"  href="./css/style.css">
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+	</head>
+	<body>
+        <section id="wrapper">
+            <header>
+                <h1>Index Program - Or&Itay</h1>
+            </header>
+            <main>
+                <section class="fileControl" ng-controller="arrangeFiles">
+                    <section class="leftUl">
+                    <h2>Unloaded</h2>
+                    <ul ng-repeat="fileName in unloadedFiles">
+                        <li><input type="checkbox" ng-model="fileName.enable">{{fileName.name}}</li>
+                    </ul>
+                    </section>
+                    <div class="uploadButtonDiv">
+                        <button ng-click="loadFilesToDB()">upload --></button>
+                    </div>
+                    <seaction class="rightUl">
+                        <h2>Loaded</h2>
+                        <ul ng-repeat="fileName in loadedFiles">
+                            <li><input type="checkbox" ng-model="fileName.enable">{{fileName.name}}</li>
+                        </ul>
+                    </seaction>
+                    <section class="clear"></section>
+                    <label id="search">
+                        <input type="text" placeholder="search for words" ng-model="phrase">
+                        <button ng-click="searchPhrase(phrase)">Search</button>
+                    </label>
+                </section>
+
+                <div ui-view></div>
+            </main>
+        </section>
+		<script src='./js/lib/angular/angular.min.js'></script>
+		<script src="./js/lib/angular/angular-ui-router.min.js"></script>
+		<script src="./js/appController.js"></script>
+	</body>
+</html>
