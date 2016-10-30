@@ -1,0 +1,115 @@
+* {
+    margin: 0 auto;
+    padding: 0;
+}
+
+main, section, nav, footer, header, aside {
+    display: block;
+}
+
+#wrapper {
+    width: 800px;
+/*    height: 600px;*/
+    padding:20px;
+    background: #d6cad2;
+}
+
+header {
+    width: 100%;
+    height: 25%;
+    text-align: center;
+    font-family: fantasy;
+    font-size: 2em;
+    padding-top: 5px;
+}
+
+.clear {
+    clear: both;
+}
+
+main {
+    width: 100%;
+}
+
+
+
+side {
+    float: right;
+    width: 30%;
+    height: 70%;
+}
+
+.leftUl {
+    display: block;
+    float: left;
+    width: 40%;
+}
+
+h2 {
+    text-align: center;
+}
+
+ul {
+     list-style-type: none;
+}
+
+
+.rightUl {
+    display: block;
+    float: right;
+    width: 40%;
+}
+
+.uploadButtonDiv {
+    width: 20%;
+    float: left;
+}
+
+.uploadButtonDiv > button {
+    margin-left: 20%;
+    margin-top: 30%;
+}
+
+.fileControl {
+    width: 100%;
+    padding: 2%;
+}
+
+.fileControl > button {
+    margin-top: 5%;
+
+}
+
+li {
+    padding-left: 25%;
+}
+
+li > input {
+    width: 15%;
+}
+
+/*
+main > label {
+    margin-top: 5%;
+    margin-left: 30%;
+}
+*/
+
+#search {
+    display: block;
+    width: 100%;
+    margin-top: 5%;
+    margin-left: 30%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
