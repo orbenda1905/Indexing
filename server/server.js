@@ -49,6 +49,7 @@ app.post('/addFiles', function(req, res) {
 
 app.post('/search', function(req, res) {
     fileParser.search(req.body.ignoreList, req.body.searchPhrase, function(data) {
+        console.log('search:\n' + JSON.stringify(data));
         res.json(data);
     })
 })

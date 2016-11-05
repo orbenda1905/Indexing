@@ -121,18 +121,34 @@ indexingApp.controller('arrangeFiles', function($scope, $http) {
     }
 
     $scope.searchPhrase = function(phrase) {
+        if (checkPhraseSyntax(phrase) == false) return;
         var size = $scope.loadedFiles.length;
         var tempList = [];
         for (var i = 0; i < size; i++) {
             if (!$scope.loadedFiles[i].enable) tempList.push($scope.loadedFiles[i].name);
         }
         $http.post("http://localhost:3000/search", {ignoreList: tempList, searchPhrase: phrase}).success(function(data) {
-
+            console.log('words:\n' + data.words + '\ntexts:\n' + data.texts);
         })
     }
 })
 
-
+function checkPhraseSyntax(phrase) {//returns true/false
+    if (phrase.length == 0) return;
+    var stack = [];
+    var size = phrase.length;
+    for (var i = 0; i < size; i++) {
+        var char = phrase.charAt(i);
+        if (char == '(') {
+            stack.push(char);
+        } else if (char == ')') {
+            char = stack.pop();
+            if (char != '(') return false;
+        } else continue;
+    }
+    if (stack.length > 0) return false;
+    return true;
+}
 
 //quickyApp.controller('loginCtrl', function($scope, $http, $location) {
 //

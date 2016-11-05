@@ -166,6 +166,248 @@ function updateNewWord(value, key) {
     });
 }
 
+function getWordTextList(word, data) {
+    var wordData = null;
+    for (var i = 0; i < data.length; i ++) {
+        if (data[i].name == word) wordData = data[i];
+    }
+    if (wordData == null) return [];
+    var list = [];
+    for (var i = 0; i < wordData.hits.length; i++) {
+        list.push(wordData.hits[i].text_id);
+    }
+    return list;
+}
+
+function getInsideBrackets(splitedPhrase, index) {//calling only when opening brackets
+//    console.log('brackets');
+    if (index >= splitedPhrase.length) return;
+    var bracketsNum = 0;
+    var word1 = splitedPhrase[index++];
+    var logic = splitedPhrase[index++];
+    var word2 = splitedPhrase[index++];
+    var answer = [];
+    if (word2 == '(') {
+        bracketsNum++;
+        word2 = getInsideBrackets(splitedPhrase, index);
+    }
+//    console.log('brackets =>  word1 = ' + word1 + ' logic = ' + logic + ' word2 = ' + word2);
+    if (logic == 'OR') {
+        answer = doOrLogic(word1, word2);
+    } else if (logic == 'AND') {
+        answer = doAndLogic(word1, word2);
+    } else if (logic == 'NOT') {
+        answer = doNotLogic(word1, word2);
+    }
+    if (bracketsNum) {
+        for (; index < splitedPhrase.length; index++) {
+            if (splitedPhrase[index] == '(') bracketsNum++;
+            if (splitedPhrase[index] == ')') bracketsNum--;
+            if (!bracketsNum) {
+                index++;
+                break;
+            }
+        }
+    }
+    return calculateLogic(answer, splitedPhrase, index);
+}
+
+//var phrase = '"angus" OR word OR ( file OR ( "word1" NOT word2 ) AND word3 ) NOT files';
+////var phrase = 'angus AND file';
+//var data = [{"name":"angus","hits":[{"text_id":2}]},
+//            {"name":"file","hits":[{"text_id":0}]},
+//            {"name":"files","hits":[{"text_id":0}]},
+//            {"name":"filesystem","hits":[{"text_id":4}]},
+//            {"name":"word","hits":[{"text_id":3}, {"text_id":0}]},
+//            {"name":"josh","hits":[{"text_id":2}]},
+//           {"name":"word1","hits":[{"text_id":0}, {"text_id":1}]},
+//           {"name":"word2","hits":[{"text_id":2}, {"text_id":4}]},
+//           {"name":"word3","hits":[{"text_id":1}, {"text_id":6}]}];
+//var list = phrase.split(" ");
+////console.log('list = ' + list);
+//convertWordsToList(list, data);
+////console.log('after convertion = ' + list);
+//var finalList = calculateLogic(list[0], list, 1);
+//console.log(finalList);
+
+function calculateLogic(word1, data, index) {
+//    console.log('calculate');
+    if (index >= data.length || data[index] ==')') return word1;
+    var bracketsNum = 0;
+    var logic = data[index++];
+    var word2 = data[index++];
+    //console.log('converting: word1 = ' + word1 + ' logic = ' + logic + ' word2 = ' + word2)
+    var answer = [];
+    if (word2 == '(') {
+        bracketsNum++;
+        word2 = getInsideBrackets(data, index);
+    }
+//    console.log('calculate => word1 = ' + word1 + ' logic = ' + logic + ' word2 = ' + word2);
+    if (logic == 'OR') {
+        answer = doOrLogic(word1, word2);
+    } else if (logic == 'AND') {
+        answer = doAndLogic(word1, word2);
+    } else if (logic == 'NOT') {
+        answer = doNotLogic(word1, word2);
+    }
+    if (bracketsNum) {
+        for (; index < data.length; index++) {
+            if (data[index] == '(') bracketsNum++;
+            if (data[index] == ')') bracketsNum--;
+            if (!bracketsNum) {
+                index++;
+                break;
+            }
+        }
+    }
+    return calculateLogic(answer, data, index);
+}
+
+function doAndLogic(l1, l2) {
+    var list = [];
+    for (var i = 0; i < l1.length; i++ ){
+        var id = l1[i];
+        if (l2.indexOf(id) != -1)
+            list.push(id);
+    }
+    return list;
+}
+
+function doNotLogic(l1, l2) {
+    var list = [];
+    for (var i = 0; i < l1.length; i++) {
+        var id = l1[i];
+        if (l2.indexOf(id) == -1)
+             list.push(id);
+    }
+    return list;
+}
+
+function doOrLogic(l1, l2) {
+    var list = l1.slice();
+    for (var i = 0; i < l2.length; i++) {
+        var id = l2[i];
+        if (list.indexOf(id) == -1) list.push(id);
+    }
+    return list;
+}
+
+function convertWordsToList(list, data) {
+    for (var i = 0; i < list.length; i++) {
+        var word = list[i];
+        if (word == 'AND' || word == 'OR' || word == 'NOT' || word == '(' || word == ')')
+            continue;
+        if (word.includes('"')) {
+            word = word.replace('"', '').replace('"', '');
+        }
+        var wordList = getWordTextList(word, data);
+        list.splice(i,1,wordList);
+    }
+}
+
+function clearNOTWord(list, data) {
+    for (var i = 0; i < list.length; i++) {
+        var word = list[i];
+        if (word == 'NOT') {
+//            if ()
+        }
+    }
+}
+
+function clearWordFromData(word, data) {
+    if (word.includes('"')) {
+        word = word.replace('"', '').replace('"', '');
+    }
+    for (var i = 0; i < data.length; i++) {
+        if (data[i].name == word) {
+            data.splice(i, 1);
+            break;
+        }
+    }
+}
+
+//var phrase = '"angus" NOT word OR ( file NOT ( "word1" AND word2 ) AND word3 ) NOT files';
+//var list = phrase.split(" ");
+//var data = [{"name":"angus","hits":[{"text_id":2}]},
+//            {"name":"file","hits":[{"text_id":0}]},
+//            {"name":"files","hits":[{"text_id":0}]},
+//            {"name":"filesystem","hits":[{"text_id":4}]},
+//            {"name":"word","hits":[{"text_id":3}, {"text_id":0}]},
+//            {"name":"josh","hits":[{"text_id":2}]},
+//           {"name":"word1","hits":[{"text_id":0}, {"text_id":1}]},
+//           {"name":"word2","hits":[{"text_id":2}, {"text_id":4}]},
+//           {"name":"word3","hits":[{"text_id":1}, {"text_id":6}]}];
+//clearNOTwordsFromData(list, data);
+//console.log(data);
+
+function clearNOTwordsFromData(list, data) {
+    var brackets = 0;
+    var NOT = false;
+    for (var i = 0; i < list.length; i++) {
+        var word = list[i];
+//        console.log('word = ' + word  + ' NOT = ' + NOT);
+        if (word == 'NOT') NOT = true;
+        else if (word ==  '(') {
+            if (NOT) brackets++;
+        }
+        else if (word == ')') {
+            if (NOT) {
+                if (--brackets == 0) NOT = false;
+            }
+        }
+        else if (word == 'AND' || word == 'OR') continue;
+        else {
+            if (NOT) {
+                clearWordFromData(word, data);
+                if (brackets == 0) {
+                    NOT = false;
+                }
+            }
+        }
+    }
+}
+
+//search([], 'the AND or OR angus NOT unix', function(data) {
+//    console.log(JSON.stringify(data));
+//})
+
+//var words = [{"name":"angus","hits":[{"text_id":2,"hits_num":10,"_id":"58177bc4accd1c600091533f"}]},{"name":"or","hits":[{"text_id":0,"hits_num":2,"_id":"581b6484f79f34163de0af6c"},{"text_id":1,"hits_num":4,"_id":"581b6484f79f34163de0af6b"}]},{"name":"the","hits":[{"text_id":2,"hits_num":19,"_id":"58177bc4accd1c6000915368"},{"text_id":0,"hits_num":11,"_id":"58177bc4accd1c6000915366"},{"text_id":1,"hits_num":3,"_id":"58177bc4accd1c6000915365"}]}];
+//
+//getTextsData([0,1,2], words, function(data) {
+//    console.log(data);
+//});
+
+function getTextsData(finalList, wordsList, callback) {
+    File.find({'id': {$in: finalList}}).select('-_id').select('-__v').lean().exec(function(err, data) {
+        for (var i = 0; i < data.length; i++) {
+//            data[i].words = new Array();
+//            var words = data[i].words;
+            var textId = data[i].id;
+            var words = [];
+            for (var j = 0; j < wordsList.length; j++) {
+                var wordName = wordsList[j].name;
+                var wordHits = wordsList[j].hits;
+                var wordHitsOnText = 0;
+                for (var k = 0; k < wordHits.length; k++) {
+                    if (wordHits[k].text_id == textId) {
+                        wordHitsOnText = wordHits[k].hits_num;
+                        break;
+                    }
+                }
+                if (wordHitsOnText > 0) {
+                    words.push({word: wordName, hits: wordHitsOnText});
+                }
+            }
+            data[i].words = words;
+//            Object.defineProperty(data[i], "words", words);
+
+//            console.log(data[i]);
+        }
+        callback(data);
+    })
+
+}
+
 function search(filesToIgnore, searchPhrase, callback) {
     var ignoreIdList;
     if (filesToIgnore) {
@@ -173,21 +415,140 @@ function search(filesToIgnore, searchPhrase, callback) {
         needToDisable = true;
     } else
         needToDisable = false;
-    Word.find({"name": {"$regex": searchPhrase, "$options": "i"}}).select('-_id').exec(function(err, data){
-//        console.log(data);
-//        callback(data);
+    var words = parsePhraseForWords(searchPhrase);
+    findWords(words, function(data) {
+        var list = searchPhrase.split(" ");//[word, AND, (, word, OR, word, )]
+//        if (list.length == 1) callback(data);//there is only one word to search for
+        convertWordsToList(list, data);
+//        startCalculateLogic(list, 0);
+
+        var finalList = calculateLogic(list[0], list, 1);
+        if (finalList.length == 0) {
+            callback(finalList);
+            return;
+        }
+        if (needToDisable) {
+            for (var i = 0; i < ignoreIdList.length; i++) {
+                var index = finalList.indexOf(ignoreIdList[i]);
+                if (index != -1) {
+                    finalList.splice(index, 1);
+                }
+            }
+        }
+        list = searchPhrase.split(" ");
+        clearNOTwordsFromData(list, data);
+        filterData(finalList, data);
+        getTextsData(finalList, data, function(answer) {
+            callback(answer);
+        })
+//        callback({words: data, texts: finalList});
+
+    });
+}
+
+//var data = [{"name":"angus","hits":[{"text_id":2}]},
+//            {"name":"file","hits":[{"text_id":0}]},
+//            {"name":"files","hits":[{"text_id":0}]},
+//            {"name":"filesystem","hits":[{"text_id":4}]},
+//            {"name":"word","hits":[{"text_id":3}, {"text_id":0}]},
+//            {"name":"josh","hits":[{"text_id":2}]},
+//           {"name":"word1","hits":[{"text_id":0}, {"text_id":1}]},
+//           {"name":"word2","hits":[{"text_id":2}, {"text_id":4}]},
+//           {"name":"word3","hits":[{"text_id":1}, {"text_id":6}]}];
+//var finalList = [2,4,6];
+//filterData(finalList, data);
+//console.log(JSON.stringify(data));
+
+//{"words":[{"name":"angus","hits":[{"text_id":2,"hits_num":10,"_id":"58177bc4accd1c600091533f"}]},{"name":"angus","hits":[{"text_id":2,"hits_num":10,"_id":"581b6484f79f34163de0b0dd"}]},{"name":"or","hits":[{"text_id":0,"hits_num":2,"_id":"58177bc4accd1c60009154cd"},{"text_id":1,"hits_num":4,"_id":"58177bc4accd1c60009154cc"}]},{"name":"or","hits":[{"text_id":0,"hits_num":2,"_id":"581b6484f79f34163de0af6c"},{"text_id":1,"hits_num":4,"_id":"581b6484f79f34163de0af6b"}]},{"name":"the","hits":[{"text_id":0,"hits_num":11,"_id":"581b6484f79f34163de0aed5"},{"text_id":1,"hits_num":3,"_id":"581b6484f79f34163de0aed4"},{"text_id":2,"hits_num":19,"_id":"581b6484f79f34163de0aed3"}]},{"name":"the","hits":[{"text_id":2,"hits_num":19,"_id":"58177bc4accd1c6000915368"},{"text_id":0,"hits_num":11,"_id":"58177bc4accd1c6000915366"},{"text_id":1,"hits_num":3,"_id":"58177bc4accd1c6000915365"}]}]}
+
+
+function filterData(finalList, data) {
+    for (var i = 0; i < data.length; i++) {
+        var hits = data[i].hits;
+        for (var j = 0; j < hits.length; j++) {
+            var id = hits[j].text_id;
+            if (finalList.indexOf(id) == -1) {
+                hits.splice(j, 1);
+                j--;
+            }
+        }
+        if (hits.length == 0) {
+            data.splice(i, 1);
+            i--;
+        }
+    }
+}
+
+
+
+//findWords(['angus', 'file']);
+//findWords(['word', 'truck', '"a"', 'find'])
+
+function findWords(wordsList, callback) {
+    for (var i = 0; i < wordsList.length; i++) {//checking with stopList
+        var word = wordsList[i];
+        if (word.includes('"')) {
+            var newWord = word.replace('"', '').replace('"', '');
+            wordsList[i] = newWord;
+        } else {
+            if (stopWords.search(word) != -1) {
+                wordsList.splice(i,1);
+                i--;
+            }
+        }
+    }
+    Word.find({'name': {$in: wordsList}}).select('-_id').select('-__v').exec(function(err, data) {
+        callback(data);
+    })
+}
+
+
+
+function parsePhraseForWords(phrase) {//saerching for the actual words in the phrase
+    var size = phrase.length;
+    var quotation = false;
+    var listOfWords = [];
+    var word;
+    var char;
+    var list = phrase.split(" ");
+    for (var i = 0; i < list.length; i++) {
+        word = list[i];
+        if (word == 'AND' || word == 'OR' || word == 'NOT' || word == ')' || word == '(') continue;
+        listOfWords.push(word);
+    }
+    return listOfWords;
+}
+
+function phraseNotLogic(phrase) {
+    var logicWords = ['AND', 'OR', 'NOT'];
+    for (var i = 0; i < logicWords.length; i++) {
+        if (phrase.includes(logicWords[i]))
+            return false;
+    }
+    return true;
+}
+
+function phraseNotHirarchial(phrase) {
+    if (phrase.includes('(') || phrase.includes(')')) return false;
+    return true;
+}
+
+function findOneWord(word, callback) {
+    Word.find({"name": {"$regex": word, "$options": "i"}}).select('-_id').select('-__v').exec(function(err, data){
         var relevantTexts = [];
         for (var i = 0; i < data.length; i++) {
             var size = data[i].hits.length;
             for (var j = 0; j < size; j++) {
                 var id = data[i].hits[j].text_id;
+                console.log('id= ' + id);
                 if (relevantTexts.indexOf(id) == -1) relevantTexts.push(id);
             }
         }
-        File.find({'id': {$in: relevantTexts}}).select('-_id').exec(function(err, answer) {
+        File.find({'id': {$in: relevantTexts}}).select('-_id').select('-__v').exec(function(err, answer) {
             if (err) console.log('failed to gfetch files data');
             else {
-                callback([data, relevantTexts]);
+                console.log('answer:\n' + data + " \n" + answer);
+                callback({words: data, texts: answer});
             }
         })
     })
@@ -201,213 +562,6 @@ function convertFileNameToId(filesToIgnore) {
     return idList;
 }
 
-function logMapElements(value, key, map) {
-    console.log("m[" + key + "] = " + JSON.stringify(value));
-}
-
-////fetching cleint data
-//function getClient(email, callback) {
-//	var query = clients.findOne().where('email', email);
-//	query.exec(function(err, doc) {
-//		if (err) {
-//			var error1 = "error searching fo client";
-//			console.log(error1);
-//			callback({type: false, data: error1});
-//		} else if (!doc) {
-//			//person is not exist
-//			var client = new clients({
-//				favorite: [],
-//				email: email,
-//				type: 'Cooker'
-//			});
-//			client.save(function(err, doc) {
-//				if (err) {
-//					var error2 = "failed creating new client";
-//					console.log(error2);
-//					callback({type: false, data: error2});
-//				} else {
-//					console.log("new client created:\n" + doc);
-//					callback({type: true, data: doc});
-//				}
-//			});
-//		} else {
-//			callback({type: true, data: doc});
-//		}
-//	})
+//function logMapElements(value, key, map) {
+//    console.log("m[" + key + "] = " + JSON.stringify(value));
 //}
-//
-//
-//function getFiles(files) {
-//
-//}
-//
-////increaing likes to recipe
-//function increaseLikes(recipeName, callback) {
-//    console.log("increasing likes");
-//	getRecipe(recipeName, function(doc) {
-//        if (doc.status) {
-//            var query = doc.data.update({$inc: {likes: 1}});
-//            query.exec(function(err) {
-//			if (err) {
-//				console.log("failed incrementing the 'like' of recipe");
-//			} else {
-//				console.log("likes updated");
-//			}
-//            callback();
-//            });
-//        } else {
-//            callback();
-//        }
-//
-//	});
-//}
-//
-////decreasing like to recipe
-//function decreaseLikes(recipeName, callback) {
-//	getRecipe(recipeName, function(doc) {
-//        if (doc.data) {
-//            if (doc.data.likes == 0) {
-//            callback();
-//            return;
-//            }
-//            var query = doc.data.update({$inc: {likes: -1}});
-//            query.exec(function(err) {
-//                if (err) {
-//                    console.log("failed decrementing the 'like' of recipe");
-//                } else {
-//                    console.log("likes decremented");
-//                }
-//                callback();
-//            });
-//        } else {
-//            callback();
-//        }
-//	});
-//}
-//
-////fetching specific recipe
-//function getRecipe(recipeName, callback) {
-//	var query = recipes.findOne().where('name', recipeName);
-//    query.exec(function(err, doc){
-//		if (err) {
-//            var error = "failed to find the recipe";
-//			console.log(error);
-//            callback({status: false, data: error});
-//		} else{
-//			callback({status: true, data: doc});
-//		}
-//    });
-//}
-//
-//exports.getRecipe = getRecipe;
-//
-////getting all the recipes that the admin still didn't make steps
-//exports.getUnmodifiedRecipes = function(req, res) {
-//	var query = recipes.find();
-//	query.where('modified', false).select('-_id');
-//	query.exec(function(err, docs) {
-//        if (err) {
-//            res.json({error: "failed to load recipes"})
-//        } else  {
-//            res.json(docs);
-//        }
-//
-//	});
-//}
-//
-////the recipes that are ready to display for the client
-//exports.getModifiedRecipes = function(time, callback) {
-//	var query = recipes.find();
-//	query.where('timers.total', time).select('-_id');
-//	query.exec(function(err, docs) {
-//        if (err || !docs) {
-//            callback({status: false});
-//        } else {
-//            callback({status: true, data: docs});
-//        }
-//	})
-//}
-//
-////updating the steps that the admin has made for specific recipe
-//exports.updateSteps = function(recipeName, steps, prep, cook, total, callback) {
-//	getRecipe(recipeName, function(doc) {
-//        if (doc.status) {
-//            doc.data.set('steps', steps);
-//            doc.data.set('modified', true);
-//            doc.data.set('timers.preparation', prep);
-//            doc.data.set('timers.cooking', cook);
-//            doc.data.set('timers.total', total);
-//            doc.data.save(function(err) {
-//			if (err) {
-//
-//				console.log("failed saving");
-//                callback({status: false});
-//			}
-//			else{
-//				console.log("updating complete");
-//                callback({status: true});
-//			}
-//		});
-//        }
-//	});
-//}
-//
-//
-//
-//exports.getClient = getClient;
-//
-////add recipe to client's favorites
-//exports.addFavorite = function(recipeName, email, callback) {
-//    getClient(email, function(answer) {
-//        if (!answer.type) {
-//            callback({status: false});
-//        } else {
-//            var client = answer.data;
-//            var size = client.favorite.length;
-//            var exist = false
-//            for (var i = 0; i < size; i++) {
-//                if (client.favorite[i] == recipeName) {
-//                    exist = true;
-//                    break;
-//                }
-//            }
-//            var query;
-//            if (exist) query = client.update({$pull:{favorite: recipeName}});
-//            else query = client.update({$push:{favorite: recipeName}});
-//            query.exec(function(err) {
-//				if (err) {
-//					console.log('failed to update client');
-//                    callback({status: false});
-//				} else {
-//					console.log('success in updating client');
-//                    if (exist) {
-//                        decreaseLikes(recipeName, function() {
-//                            callback({status: true});
-//                        });
-//                    }else{
-//                        increaseLikes(recipeName, function() {
-//                            callback({status: true});
-//                        });
-//                    }
-//
-//				}
-//			});
-//        }
-//    });
-//}
-//
-////receiving "favor" = name list of client's favorits recipes
-////retreiving those favorites recipes
-////"favor" is an Array
-//exports.getFavorites = function(favor, callback) {
-//    recipes.find({'name': { $in: favor}}, function(err, data) {
-//        if (err) {
-//            console.log(err);
-//        } else {
-//            console.log(data);
-//            callback(data);
-//        }
-//    })
-//}
-
-
