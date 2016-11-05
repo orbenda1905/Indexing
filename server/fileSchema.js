@@ -3,8 +3,9 @@ var schema = mongoose.Schema;
 
 var fileSchema = new schema({
 	id: Number,
+    source:String,
     date: String,
-	subject: {type:String, required:true, unique:true},
+	subject: {type:String, required:true, index:1, unique:true},
 	preface: String
 }, {collection: "files"});
 

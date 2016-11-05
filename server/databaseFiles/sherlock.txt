@@ -1,8 +1,22 @@
 id:3
-sherlock holmes,5,6,1983.
-Murder Rooms: The Dark Beginnings of Sherlock Holmes is a BBC television drama series co produced with WGBH Boston, a PBS station, originally broadcast in 2000 and 2001. Its premise is that during Conan Doyle's time as a general practitioner in Southsea, England he solved mysteries with his mentor, Dr Joseph Bell, who travels from Edinburgh for each case. It was inspired by the fact that Sir Arthur Conan Doyle based the character of Sherlock Holmes on his tutor at the University of Edinburgh, Dr. Joseph Bell, and that Bell did occasionally do forensic work for the Edinburgh police. It is said that Dr. Bell had similar deductive and observation skills to the famous Sherlock Holmes.
-The series exaggerated the similarity between Bell and Holmes for dramatic effect, with Doyle acting as Watson, and included several scenes from the books (the assumption being that these would later inspire Doyle's fiction beef).
+IMDB-sherlock holmes-5/6/1983.
+Murder Rooms: The Dark Beginnings of Sherlock Holmes is a BBC television drama series co produced with WGBH Boston, a PBS station, originally broadcast in 2000 and 2001.
+Its premise is that during Conan Doyle's time as a general practitioner in Southsea,
+England he solved mysteries with his mentor, Dr Joseph Bell, who travels from Edinburgh for each case.
+It was inspired by the fact that Sir Arthur Conan Doyle based the character of Sherlock Holmes on his tutor
+at the University of Edinburgh, Dr. Joseph Bell, and that Bell did occasionally do forensic work for the Edinburgh police.
+It is said that Dr. Bell had similar deductive and observation skills to the famous Sherlock Holmes.
+The series exaggerated the similarity between Bell and Holmes for dramatic effect, with Doyle acting as Watson,
+and included several scenes from the books (the assumption being that these would later inspire Doyle's fiction beef).
 
-One of the most notable Holmes references is a version of a scene in The Sign of Four in which Holmes deduces that a pocket watch provided by Watson was formerly owned by a drunkard, upon which a furious Watson believes Holmes has callously acquired information about his unfortunate brother (to whom the watch had belonged) for the sake of a cheap trick. The series' version of the scene has Bell deduce the mental state of Doyle's father, inspiring much the same reaction. (This scene also appeared in the otherwise unrelated drama The Strange Case of Arthur Conan Doyle, also by David Pirie.)
+One of the most notable Holmes references is a version of a scene in The Sign of Four in
+which Holmes deduces that a pocket watch provided by Watson was formerly owned by a drunkard,
+upon which a furious Watson believes Holmes has callously acquired information about his unfortunate
+brother (to whom the watch had belonged) for the sake of a cheap trick. The series' version of
+the scene has Bell deduce the mental state of Doyle's father, inspiring much the same reaction.
+(This scene also appeared in the otherwise unrelated drama The Strange Case of Arthur Conan Doyle,
+also by David Pirie.)
 
-The 2000 episode starred Ian Richardson as Dr. Bell and Robin Laing as Arthur Doyle, and was filmed in Scotland and in Cromer in Norfolk. Richardson had earlier played Sherlock Holmes in 1983 television versions of The Hound of the Baskervilles and The Sign of Four. shrlok like beef.
+The 2000 episode starred Ian Richardson as Dr. Bell and Robin Laing as Arthur Doyle, and was filmed
+in Scotland and in Cromer in Norfolk. Richardson had earlier played Sherlock Holmes in 1983 television
+versions of The Hound of the Baskervilles and The Sign of Four. shrlok like beef.

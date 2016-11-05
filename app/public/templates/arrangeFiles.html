@@ -1,0 +1,35 @@
+<section class="well-searchbox">
+   <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div id="custom-search-input">
+                    <div class="input-group col-md-12">
+                        <input type="text" class="form-control input-lg" placeholder="search for words" ng-model="phrase"/>
+                        <span class="input-group-btn">
+                            <button ng-click="searchPhrase(phrase)" class="btn btn-info btn-lg" type="button">
+                                <i class="search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="leftUl">
+        <h2>Unloaded</h2>
+        <ul ng-repeat="fileName in unloadedFiles">
+            <li><input type="checkbox" ng-model="fileName.enable">{{fileName.name}}</li>
+        </ul>
+        <div class="uploadButtonDiv">
+            <button class="btn btn-primary" ng-click="loadFilesToDB()">Upload</button>
+        </div>
+    </section>
+    <seaction class="rightUl">
+        <h2>Loaded</h2>
+        <ul ng-repeat="fileName in loadedFiles">
+            <li><input type="checkbox" ng-model="fileName.enable">{{fileName.name}}</li>
+        </ul>
+    </seaction>
+    <section class="clear"></section>
+</section>
+<div ui-view></div>

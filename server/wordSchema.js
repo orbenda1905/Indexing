@@ -10,7 +10,6 @@ var hitsSchema = new schema({
 
 var words = new schema({
 	name: {type:String, required:true, index:1, unique:true},
-    //postings:Number,
     hits:[hitsSchema],
 }, {collection: "word"});
 

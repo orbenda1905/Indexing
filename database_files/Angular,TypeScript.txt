@@ -1,4 +1,3 @@
-id:0
 InfoQ-Angular and TypeScript-26/4/2016.
 AngularJS is by far the most popular JavaScript framework available today for creating web applications.
 And now Angular 2 and TypeScript are bringing true object oriented web development to the mainstream,

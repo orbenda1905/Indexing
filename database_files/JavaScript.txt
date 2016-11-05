@@ -1,4 +1,3 @@
-id:1
 Wikipedia-JavaScript-23/5/1995.
 JavaScript is a high-level, dynamic, untyped, and interpreted programming language.
 [6] It has been standardized in the ECMAScript language specification.[7] Alongside HTML and CSS,

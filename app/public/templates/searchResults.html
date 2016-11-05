@@ -1,0 +1,25 @@
+
+   <div class="container">
+    <hgroup class="mb20">
+        <h1>Search Results</h1>
+        <h2 class="lead"><strong class="text-danger">{{results.length}}</strong> results were found for the search for <strong class="text-danger">{{phrase}}</strong></h2>
+    </hgroup>
+    <section class="col-xs-12 col-sm-6 col-md-12">
+        <article class="search-result row" ng-repeat="result in results">
+            <div class="col-xs-12 col-sm-12 col-md-2">
+                <ul class="meta-search">
+                    <li><i class="glyphicon glyphicon-calendar"></i> <span>{{result.date}}</span></li>
+                    <li><i class="glyphicon glyphicon-time"></i> <span>{{result.source}}</span></li>
+                    <li><i class="glyphicon glyphicon-tags"></i> <span ng-repeat="word in result.words">{{word.word}}->{{word.hits}}, </span></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+                <h3>{{result.subject}}</h3>
+                <p>{{result.preface}}</p>
+                <span class="plus"><div ng-click="getFileContent(result.id, result.words)"><i class="glyphicon glyphicon-plus"></i></div></span>
+            </div>
+            <span class="clearfix borda"></span>
+        </article>
+        <div ui-view></div>
+    </section>
+</div>

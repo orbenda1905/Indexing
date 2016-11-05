@@ -180,6 +180,8 @@ hgroup h2.lead {
     font-size: 23px;
 }
 
+.highlight { background-color: yellow }
+
 @media (min-width: 992px) {
     .col-md-6 {
         float: none !important;
