@@ -6,7 +6,7 @@ var Word = require('./wordSchema.js');
 var File = require('./fileSchema.js');
 var prependFile = require('prepend-file');
 
-var texts = new Array('flat_file_database.txt', 'laptop.txt', 'red_angus.txt', 'sherlock.txt', 'UNIX.txt');
+var texts = new Array('Angular,TypeScript.txt', 'JavaScript.txt', 'Rib-eye_steak.txt', 'sherlock.txt', 'Surface-Studio.txt');
 var wordsMap = new Map();
 
 var filesToLoad = 0;

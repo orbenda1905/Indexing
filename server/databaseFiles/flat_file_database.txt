@@ -1,9 +1,0 @@
-id:0
-flat file database, 12/3/1987.
-A flat file database is a database which, when not being used, is stored on its host computer system as an ordinary, non-indexed "flat" file.
-To access the structure of the data and manipulate it, the file must be read in its entirety into the computer's memory. Upon completion of the database operations, the file is again written out in its entirety to the host's file system. In this stored mode, the database has no structure which can be seen external to the file and thus is referred to as a "flat file."
-
-The term has generally implied a small, simple database. As computer memory has gotten cheaper, larger and more sophisticated databases can now be held in memory in their entirely for faster access, but these would not generally be referred to as flat-file databases.
-
-A flat file can be a plain text file or a binary file. There are usually no structural relationships between the records.
-Plain text files usually contain one record per line, There are different conventions for depicting data. In comma-separated values and delimiter-separated values files, fields can be separated by delimiters such as comma or tab characters. In other cases, each field may have a fixed length; short values may be padded with space characters. Extra formatting may be needed to avoid delimiter collision. More complex solutions are markup languages and programming languages.

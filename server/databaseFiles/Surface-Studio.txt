@@ -1,0 +1,10 @@
+Microsoft - Surface Studio ,30,10,2016.
+The Surface Studio is an all-in-one PC, designed and produced by Microsoft as part of its Surface series of Windows-based personal computing devices. It was announced at the Windows 10 Devices Event on October 26, 2016, with pre-orders beginning that day.
+
+The Surface Studio uses the Windows 10 operating system with the Anniversary Update preinstalled. However, it is optimized for Microsoft's upcoming Creators Update, scheduled for release in Spring 2017. The product, starting at $2,999, is aimed primarily at people in creative professions such as graphic artists, designers, and so on.
+
+The Surface Studio has a 28-inch 4.5K "PixelSense" display with 4500 x 3000 pixels, equivalent to 192 dpi. The screen, the thinnest ever built for an all-in-one PC, is capable of being used in both the DCI-P3 and sRGB color spaces, and features a unique hinge design that allows it be tilted to a flat position, in a manner similar to the Wacom Cintiq.
+
+Microsoft specially designed its Surface Mouse and Surface Keyboard to work with the Surface Studio. It is also compatible with the Surface Pen and a newly-created accessory, the so-called Surface Dial. The latter consists of a round disk that can be placed on the display and rotated to perform various actions, such as scrolling, zooming, adjusting the volume, among others, with precision. Developers can utilize its APIs to integrate its functionality into their own products.
+
+The CPU is located in the base. Its compact design contains an Intel Core i7 processor, a GeForce GTX 980M graphics card, 32 GB of RAM and a 2 terabyte hard drive. It also features four USB 3.0 ports, a Mini DisplayPort , an SDXC card reader and a headset connection.
