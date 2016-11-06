@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-mongoose.connect("mongodb://orbenda1905:orbenda1905@ds063856.mlab.com:63856/words");
+mongoose.connect("put your mongo collection here");
 var conn = mongoose.connection;
 conn.on('error', function(err) {
 	console.log('connection error ' + err);
