@@ -8,9 +8,9 @@
         <article class="search-result row" ng-repeat="result in results">
             <div class="col-xs-12 col-sm-12 col-md-2">
                 <ul class="meta-search">
-                    <li><i class="glyphicon glyphicon-calendar"></i> <span>{{result.date}}</span></li>
-                    <li><i class="glyphicon glyphicon-time"></i> <span>{{result.source}}</span></li>
-                    <li><i class="glyphicon glyphicon-tags"></i> <span ng-repeat="word in result.words">{{word.word}}->{{word.hits}}, </span></li>
+                    <li><i class="glyphicon glyphicon-calendar"></i> <span>Date - {{result.date}}</span></li>
+                    <li><i class="glyphicon glyphicon-time"></i> <span>Author - {{result.source}}</span></li>
+                    <li><i class="glyphicon glyphicon-tags"></i> <span ng-repeat="word in result.words">Hits - {{word.word}} - {{word.hits}} </span></li>
                 </ul>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
