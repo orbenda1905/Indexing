@@ -25,6 +25,7 @@ globalData.instructions = "<section>" +
                     "<li>The phrase must start with a word.</li>" +
                     "<li>Inside brackets there must be at least two words with logical operator.</li>" +
                     "<li>You must keep spacing between each part in the phrase -> W OP W ( W OP W ).</li>" +
+                    "<li>You can't open brackets immediately after opening brackets->logically it's not needed. wrong example: W ( ( W OP W) OP W )</li>"
                 "</ul>" +
                 "<br>" +
                 "On each result there is a “plus” sign, by pressing it you will see the text with the marked words." +
