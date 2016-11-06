@@ -109,8 +109,8 @@ hgroup h2.lead {
     margin-top: 0 !important;
     margin-bottom: 10px !important;
 }
-.search-result h3 > a, .search-result i {
-    color: #248dc1 !important;
+.plus i {
+    color: #fff !important;
 }
 .search-result p {
     font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif;
@@ -136,7 +136,10 @@ hgroup h2.lead {
     margin: 0 15px;
     border-bottom: 1px dotted #ccc;
 }
+.btn-success {
+    float: right;
 
+}
 .well-searchbox {
   min-height: 20px;
   min-width: 400px;
@@ -180,11 +183,19 @@ hgroup h2.lead {
     font-size: 23px;
 }
 
+
 #help {
     background: #879db2;
     color: aliceblue;
     width: 50px;
     border-radius: 10px;
+}
+.search-result span.plus i {
+    background-color: #248dc1;
+    padding: 5px 5px 3px 5px;
+}
+.search-result span.plus i:hover {
+    background-color: #414141;
 }
 
 .highlight { background-color: yellow }
