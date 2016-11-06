@@ -209,7 +209,8 @@ function getInsideBrackets(splitedPhrase, index) {//calling only when opening br
             }
         }
     }
-    return calculateLogic(answer, splitedPhrase, index);
+    if (splitedPhrase[index] == ')') return answer;
+    else return calculateLogic(answer, splitedPhrase, index);
 }
 
 function calculateLogic(word1, data, index) {
@@ -239,7 +240,8 @@ function calculateLogic(word1, data, index) {
             }
         }
     }
-    return calculateLogic(answer, data, index);
+    if (data[index] == ')') return answer;
+    else return calculateLogic(answer, data, index);
 }
 
 function doAndLogic(l1, l2) {

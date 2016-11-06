@@ -2,6 +2,35 @@ var indexingApp = angular.module('indexing',["ui.router"]);
 
 var globalData = {};
 
+function help() {
+    var printWindow = window.open();
+        printWindow.document.open('text/plain')
+        printWindow.document.write(globalData.instructions);
+        printWindow.document.close();
+        printWindow.focus();
+//        printWindow.close();
+}
+
+globalData.instructions = "<section>" +
+                "<h1>Instruction</h1>" +
+                "When loading the page, you can see the already “Loaded” files and what can be load.<br>" +
+                "In order to load new file to the system, simply mark files from the “Unloaded” column and press “update” button.<br><br>" +
+
+               "In order to disable files’ simply unmark them from the “Loaded” column’ and then search.<br>" +
+
+                "<h2>Searching</h2>" +
+                "There are few basic rules for searching:" +
+                "<ul>" +
+                    "<li>The phrase must be legal logically (each opening brackets must come with closing ones).</li>" +
+                    "<li>The phrase must start with a word.</li>" +
+                    "<li>Inside brackets there must be at least two words with logical operator.</li>" +
+                    "<li>You must keep spacing between each part in the phrase -> W OP W ( W OP W ).</li>" +
+                "</ul>" +
+                "<br>" +
+                "On each result there is a “plus” sign, by pressing it you will see the text with the marked words." +
+
+            "</section>";
+
 
 indexingApp.config(function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider.otherwise("/")

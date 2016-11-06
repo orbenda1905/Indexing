@@ -180,6 +180,13 @@ hgroup h2.lead {
     font-size: 23px;
 }
 
+#help {
+    background: #879db2;
+    color: aliceblue;
+    width: 50px;
+    border-radius: 10px;
+}
+
 .highlight { background-color: yellow }
 
 @media (min-width: 992px) {
