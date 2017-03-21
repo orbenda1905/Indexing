@@ -1,9 +1,8 @@
 # Indexing Program
 
-This progaram parse the files you put in "database_files" folder and puts the words in mongo collection.
-You must deliver the mongo collection inside inside /server/indexingDatabase, in the mongoose.connect functions.
+This program parser the files you put in "database_files" folder and indexing the words to mongo collection. 
+You must deliver the mongo collection inside /server/indexingDatabase, in the mongoose.connect functions.
 This program search options is working with logic Ooperators (AND, OR, NOT).
-
 
 ## Instruction
 
